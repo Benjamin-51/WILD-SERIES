@@ -1,6 +1,38 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-   <h1>Bienvenue !</h1>
-   <img src="{{ asset('build/images/reload.png') }}" alt=""/>
+   <style>
+         .poster {
+         max-height:40px;
+      }
+         .intro {
+            margin-left:10%;
+         }
+         .program-title {
+            margin-left:4%;
+         }
+         .program-summary {
+            margin-left:1%;
+            color:#E5E5E5;
+         }
+   </style>
+    <h1 class="intro">Toutes les séries de la table program : </h1>
+    {% for program in programs %}
+        <div>
+            <h2 class="program-title">
+               <img class="poster" src="{{ program.poster }}"/>
+               {{ loop.index }} / {{ program.title }} - Catégorie : {{ program.category.name }}
+            </h2>
+            <p class="program-summary">{{ program.summary }}</br>
+            <a class="program-summary" href="{{ path("program_show", { id: program.id }) }}">Voir la fiche</a>
+            </p>
+            
+        </div>
+    {% else %}
+        Aucune série trouvée.
+    {% endfor %}
+
+    <a href="{{ path('app_index') }}">
+        Retour à l'accueil
+    </a>
 {% endblock %}
