@@ -7,13 +7,13 @@ use Symfony\Component\Routing\Annotation\Route;
 
 
 /**
-* @Route("/program", name="program_")
-*/
+ * @Route("/program", name="program_")
+ */
 class ProgramController extends AbstractController
 {
     /**
-    * @Route("/", name="index")
-    */
+     * @Route("/", name="index")
+     */
 
     public function index(): Response
     {
@@ -22,8 +22,8 @@ class ProgramController extends AbstractController
     }
 
     /**
-    * @Route("/{id}/", methods={"GET"} , requirements={"id"="\d+"} , name="show")
-    */
+     * @Route("/{id}/", methods={"GET"} , requirements={"id"="\d+"} , name="show")
+     */
 
     public function show(int $id): Response
     {
@@ -33,8 +33,8 @@ class ProgramController extends AbstractController
     }
 
     /**
-    * @Route("/{id}/", methods={"GET"}, name="show_not_found")
-    */
+     * @Route("/{id}/", methods={"GET"}, name="show_not_found")
+     */
 
     public function showNotFound($id): Response
     {
