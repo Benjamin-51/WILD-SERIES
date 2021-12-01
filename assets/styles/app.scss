@@ -8,6 +8,10 @@ body {
     color: $white;
 }
 
+.page-content {
+    margin-left: max(min(3%, 50px), 30px);
+}
+
 :root {
     --bs-dark-rgb: 104, 24, 24;
 }

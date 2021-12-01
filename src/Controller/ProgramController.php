@@ -55,13 +55,4 @@ class ProgramController extends AbstractController
     ]);
     }
 
-    /**
-     * @Route("/{id}/", methods={"GET"}, name="show_not_found")
-     */
-
-    public function showNotFound($id): Response
-    {
-        throw $this->createNotFoundException('This adress isn\'t valid.');
-    }
-
 }
