@@ -16,23 +16,13 @@
         <img class="poster align-self-start mr-3" src="{{program.poster}}" alt="{{ program.title }} poster">
         <div class="media-body">
             <h1 class="mt-0">Saison {{season.number}} de {{ program.title }}</h1>
-            <p>{{ program.summary }}</p>
-            <p>Catégorie : {{ program.category.name }}</p>
         </div>
 
-        <ul class="episode-list">
-            {% for episode in episodes %}
-                <li><a href="#{{episode.id}}-anchor">Episode {{episode.number}} : {{episode.title}}</a></li>
-            {% endfor %}
-        </ul>
         <div class="episode-descriptions">
-            {% for episode in episodes %}
                 <div id="{{episode.id}}-anchor" class="episode-description">
-                    <p>Episode {{episode.number}} : {{episode.title}}</p>
+                    <h2>Episode {{episode.number}} : {{episode.title}}</h2>
                     <p>{{episode.synopsis}}
                 </div>
-            {% endfor %}
-
 
         </div>
     </div>

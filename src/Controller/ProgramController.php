@@ -34,23 +34,11 @@ class ProgramController extends AbstractController
 
     /**
      * Getting a program by id
-     * 
-     * @Route("/show/{id}/", methods={"GET"} , requirements={"id"="\d+"} , name="show")
-     *  @return Response
+     * @Route("/show/{id}/" , name="show")
      */
 
-    public function show(int $id): Response
+    public function show(Program $program): Response
     {
-        $program = $this->getDoctrine()
-        ->getRepository(Program::class)
-        ->findOneBy(['id' => $id]);
-
-        if (!$program) {
-            throw $this->createNotFoundException(
-                'No program with id : '.$id.' found in program\'s table.'
-            );
-        }
-
         $seasons = $this->getDoctrine()
         ->getRepository(Season::class)
         ->findBy(['program' => $program->getId()]);
@@ -62,33 +50,11 @@ class ProgramController extends AbstractController
     }
 
     /**
-     * Getting  
-     * 
-     * @Route("/{programId}/seasons/{seasonId}", methods={"GET"} , requirements={"programId"="\d+", "seasonId"="\d+"} , name="season_show")
-     *  @return Response
+     * Getting a program and a season
+     * @Route("/{program}/seasons/{season}", methods={"GET"} , name="season_show")
      */
-    public function showSeason(int $programId, int $seasonId): Response
+    public function showSeason(Program $program, Season $season): Response
     {
-        $program = $this->getDoctrine()
-        ->getRepository(Program::class)
-        ->findOneBy(['id' => $programId]);
-
-        if (!$program) {
-            throw $this->createNotFoundException(
-                'No program with id : '.$id.' found in program\'s table.'
-            );
-        }
-
-        $season = $this->getDoctrine()
-        ->getRepository(Season::class)
-        ->findOneBy(['id' => $seasonId]);
-
-        if (!$season) {
-            throw $this->createNotFoundException(
-                'No season with id : '.$id.' found in season\'s table.'
-            );
-        }
-
         $episodes = $this->getDoctrine()
         ->getRepository(Episode::class)
         ->findBy(['season' => $season->getId()]);
@@ -97,6 +63,19 @@ class ProgramController extends AbstractController
             'program' => $program,
             'season' => $season,
             'episodes' => $episodes,
+        ]);
+    }
+
+        /**
+     * Getting a program, season and episode
+     * @Route("/{program}/seasons/{season}/episode/{episode}", methods={"GET"} , name="episode_show")
+     */
+    public function showEpisode(Program $program, Season $season, Episode $episode): Response
+    {
+        return $this->render('program/episode_show.html.twig', [
+            'program' => $program,
+            'season' => $season,
+            'episode' => $episode,
         ]);
     }
 
