@@ -47,7 +47,7 @@ class CategoryController extends AbstractController
         // Get data from HTTP request
         $form->handleRequest($request);
         // Was the form submitted ?
-        if ($form->isSubmitted()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             // Deal with the submitted data
             // Get the Entity Manager
             $entityManager = $this->getDoctrine()->getManager();
@@ -59,7 +59,9 @@ class CategoryController extends AbstractController
             return $this->redirectToRoute('category_index');
         }
         // Render the form
-        return $this->render('category/new.html.twig', ["form" => $form->createView()]);
+        return $this->render('category/new.html.twig', [
+            "form" => $form->createView(),
+        ]);
     }
 
     /**
