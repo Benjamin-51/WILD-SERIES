@@ -6,7 +6,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Program;
-use App\Entity\Season;
 use App\Entity\Episode;
 use App\Form\ProgramType;
 
@@ -41,13 +40,8 @@ class ProgramController extends AbstractController
 
     public function show(Program $program): Response
     {
-        $seasons = $this->getDoctrine()
-        ->getRepository(Season::class)
-        ->findBy(['program' => $program->getId()]);
-
         return $this->render('program/show.html.twig', [
             'program' => $program,
-            'seasons' => $seasons,
         ]);
     }
 
