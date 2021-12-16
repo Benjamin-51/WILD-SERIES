@@ -1,34 +1,43 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Season{% endblock %}
+{% block title %}Série #{{ season.program.id }}{% endblock %}
 
 {% block body %}
-    <h1>Season</h1>
+   <style>
+        .poster {
+            max-height:400px;
+      }
+        .episode-description {
+            margin-bottom:35px;
+        }
+   </style>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ season.id }}</td>
-            </tr>
-            <tr>
-                <th>Number</th>
-                <td>{{ season.number }}</td>
-            </tr>
-            <tr>
-                <th>Year</th>
-                <td>{{ season.year }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ season.description }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="media">
+        <img class="poster align-self-start mr-3" src="{{season.program.poster}}" alt="{{ season.program.title }} poster">
+        <div class="media-body">
+            <h1 class="mt-0">Saison {{season.number}} de {{ season.program.title }}</h1>
+            <p>{{ season.program.summary }}</p>
+            <p>Catégorie : {{ season.program.category.name }}</p>
+        </div>
 
-    <a href="{{ path('season_index') }}">back to list</a>
+        <ul class="episode-list">
+            {% for episode in season.episodes %}
+                <li><a href="#{{episode.id}}-anchor">Episode {{episode.number}} : {{episode.title}}</a></li>
+            {% endfor %}
+        </ul>
+        <div class="episode-descriptions">
+            {% for episode in season.episodes %}
+                <div id="{{episode.id}}-anchor" class="episode-description">
+                    <p>Episode {{episode.number}} : {{episode.title}}</p>
+                    <p>{{episode.synopsis}}
+                </div>
+            {% endfor %}
 
-    <a href="{{ path('season_edit', {'id': season.id}) }}">edit</a>
 
-    {{ include('season/_delete_form.html.twig') }}
+        </div>
+    </div>
+
+    <a href="{{ path('program_index') }}">
+        Retour à la liste des programmes
+    </a>
 {% endblock %}

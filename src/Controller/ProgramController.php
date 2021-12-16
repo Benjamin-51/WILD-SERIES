@@ -45,23 +45,6 @@ class ProgramController extends AbstractController
         ]);
     }
 
-    /**
-     * Getting a program and a season
-     * @Route("/{program}/seasons/{season}", methods={"GET"} , name="season_show")
-     */
-    public function showSeason(Program $program, Season $season): Response
-    {
-        $episodes = $this->getDoctrine()
-        ->getRepository(Episode::class)
-        ->findBy(['season' => $season->getId()]);
-
-        return $this->render('program/season_show.html.twig', [
-            'program' => $program,
-            'season' => $season,
-            'episodes' => $episodes,
-        ]);
-    }
-
         /**
      * Getting a program, season and episode
      * @Route("/{program}/seasons/{season}/episode/{episode}", methods={"GET"} , name="episode_show")
